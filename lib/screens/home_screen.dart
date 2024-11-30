@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:machinetext_ecommersproduct_catalog/api_service/api_services.dart';
 import 'package:machinetext_ecommersproduct_catalog/provider_service/product_modal.dart';
+import 'package:machinetext_ecommersproduct_catalog/provider_service/wishlist_provider.dart';
 import 'package:machinetext_ecommersproduct_catalog/screens/cart_screen.dart';
 import 'package:machinetext_ecommersproduct_catalog/screens/product_details.dart';
+import 'package:machinetext_ecommersproduct_catalog/screens/wishlist_screen.dart';
+import 'package:provider/provider.dart';
 
 
 // import 'cart_screen.dart';
@@ -80,19 +83,28 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('E-Commerce App'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CartScreen()),
-              );
-            },
-          ),
-        ],
-      ),
+  title: const Text('E-Commerce App'),
+  actions: [
+    IconButton(
+      icon: const Icon(Icons.favorite),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const WishlistScreen()),
+        );
+      },
+    ),
+    IconButton(
+      icon: const Icon(Icons.shopping_cart),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const CartScreen()),
+        );
+      },
+    ),
+  ],
+),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(
@@ -196,6 +208,34 @@ class ProductCard extends StatelessWidget {
                   product.image,
                   fit: BoxFit.contain,
                 ),
+              ),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Consumer<WishlistProvider>(
+                builder: (context, wishlistProvider, child) {
+                  final isInWishlist = wishlistProvider.isInWishlist(product);
+                  return IconButton(
+                    icon: Icon(
+                      isInWishlist ? Icons.favorite : Icons.favorite_border,
+                      color: isInWishlist ? Colors.red : Colors.grey,
+                    ),
+                    onPressed: () {
+                      wishlistProvider.toggleWishlist(product);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            isInWishlist 
+                              ? 'Removed from wishlist' 
+                              : 'Added to wishlist'
+                          ),
+                          duration: const Duration(seconds: 1),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
             Padding(

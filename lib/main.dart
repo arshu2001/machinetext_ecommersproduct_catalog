@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:machinetext_ecommersproduct_catalog/provider_service/cart_provider.dart';
+import 'package:machinetext_ecommersproduct_catalog/provider_service/wishlist_provider.dart';
 import 'package:machinetext_ecommersproduct_catalog/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
        providers: [
-        ChangeNotifierProvider(create: (_) => CartProvider())
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => WishlistProvider()),
        ],
         child:  MaterialApp(
           debugShowCheckedModeBanner: false,
