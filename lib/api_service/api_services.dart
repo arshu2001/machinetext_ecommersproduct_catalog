@@ -1,7 +1,7 @@
 // lib/services/api_service.dart
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:machinetext_ecommersproduct_catalog/product_modal.dart';
+import 'package:machinetext_ecommersproduct_catalog/provider_service/product_modal.dart';
 
 
 class ApiService {

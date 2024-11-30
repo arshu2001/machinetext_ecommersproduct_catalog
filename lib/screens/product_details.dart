@@ -1,6 +1,7 @@
 // lib/screens/product_detail_screen.dart
 import 'package:flutter/material.dart';
-import 'package:machinetext_ecommersproduct_catalog/product_modal.dart';
+import 'package:machinetext_ecommersproduct_catalog/provider_service/cart_provider.dart';
+import 'package:machinetext_ecommersproduct_catalog/provider_service/product_modal.dart';
 import 'package:provider/provider.dart';
 
 
@@ -61,13 +62,13 @@ class ProductDetailScreen extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // context.read<CartProvider>().addItem(product);
-                        // ScaffoldMessenger.of(context).showSnackBar(
-                        //   const SnackBar(
-                        //     content: Text('Item added to cart'),
-                        //     duration: Duration(seconds: 2),
-                        //   ),
-                        // );
+                        context.read<CartProvider>().addItem(product);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Item added to cart'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(16.0),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:machinetext_ecommersproduct_catalog/api_services.dart';
-import 'package:machinetext_ecommersproduct_catalog/product_details.dart';
-import 'package:machinetext_ecommersproduct_catalog/product_modal.dart';
+import 'package:machinetext_ecommersproduct_catalog/api_service/api_services.dart';
+import 'package:machinetext_ecommersproduct_catalog/provider_service/product_modal.dart';
+import 'package:machinetext_ecommersproduct_catalog/screens/cart_screen.dart';
+import 'package:machinetext_ecommersproduct_catalog/screens/product_details.dart';
+
 
 // import 'cart_screen.dart';
 
@@ -83,10 +85,10 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const CartScreen()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartScreen()),
+              );
             },
           ),
         ],
